@@ -1,0 +1,21 @@
+# GitBook build outputs (do not version)
+_book/
+docs/
+gitbook/
+
+# Generated site files
+*.html
+
+# Node tooling (if you use gitbook-cli)
+node_modules/
+
+# Logs and caches
+*.log
+.cache/
+.tmp/
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

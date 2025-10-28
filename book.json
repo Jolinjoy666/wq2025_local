@@ -3,7 +3,7 @@
         "intopic-toc",
         "callouts",
         "page-footer-ex",
-        "-livereload",
+        "livereload",
         "theme-comscore",
         "-sharing"
     ],
