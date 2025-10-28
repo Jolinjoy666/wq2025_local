@@ -21,6 +21,10 @@ Keil 是一款用于 ARM 架构处理器开发的 SDK 软件, 支持灵活丰富
 
 为新建的工程添加源代码文件, 右键 Source Group 1, 选择 "Add Existing Files to Group 'Source Group 1'", 将 "/Task1/keil/" 文件夹下的汇编文件 "startup_CMSDK_CM0.s" 添加进来.
 
+> #### question::没找到这个文件？
+> 
+> 是不是没有把文件类型更改为 All files.
+
 <img src="/img/lab1/02-03.png" alt="02-03" style="zoom:100%;" /><center style="color:#0";>添加源文件</center> 
 
 <!-- -->
@@ -78,7 +82,7 @@ fromelf -cvf .\code.axf -o code.txt
 
 ## 链接设置
 
-在 Options 界面中的 Linker 栏中勾选 "Use Memory Layout from Target Dialog" 以及 "Don’t Search Standard Librarie" 两个选项.
+在 Options 界面中的 Linker 栏中勾选 "Use Memory Layout from Target Dialog" 以及 "Don’t Search Standard Librarie" 两个选项. 前者让链接器会使用“Target” 标签页中配置的内存布局来分配代码和数据段, 后者使其不搜索标准库，减少文件大小和链接时间.
 
 <center><img src="/img/lab1/02-08.png" alt="02-08" style="zoom:80%;" /></center><center style="color:#0";>Linker 设置</center> 
 

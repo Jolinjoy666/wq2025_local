@@ -8,7 +8,7 @@
 
 <center><img src="/img/lab1/02-27.png" alt="02-27" style="zoom:75%;" /></center><center style="color:#0";>移除源文件的方法</center> 
 
-打开文件夹 "./Task1/call", 发现这里已经为你准备好了本实验需要的启动文件, 直接将其添加至工程 Target 中即可. 打开启动文件, <font color='red'>你会发现这里多了几行用于栈初始化的代码 (记住这句话, 待会要考).</font>
+打开文件夹 "./Task1/call", 发现这里已经为你准备好了本实验需要的启动文件 startup_CMSDK_CM0.s , 直接将其添加至工程 Target 中即可. 打开启动文件, <font color='red'>你会发现这里多了几行用于栈初始化的代码 (记住这句话, 待会要考).</font>
 
 然后在 "./Task1/call" 中新建文件 "main.c" 和 "strcopy.s" 并添加至工程 Target 中. 
 

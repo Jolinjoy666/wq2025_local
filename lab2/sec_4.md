@@ -95,7 +95,7 @@
 
 <center><img src="/img/lab2/pics/18.png" alt="36" style="zoom:70%;" /></center><center style="color:#0";>每次下载前记得检查比特流文件路径是否有误</center>
 
-如果在Bit文件选择的时候，发现没有识别到FPGA开发板，请参考[JTAG驱动安装](#JTAG驱动安装)
+如果在Bit文件选择的时候，发现没有识别到FPGA开发板，请参考[JTAG驱动安装](#jtag驱动安装)
 
 <!-- -->
 > #### hint::TD 的工程目录结构
