@@ -28,6 +28,6 @@
 > 由于 FLASH 每次被写入前都需要进行漫长的擦除操作, 而写入操作本身也是一个比较缓慢的过程, 所以相比 Program Device, Add Configuration Memory Device 一般需要花费更多的时间.
 
 <!-- -->
-> #### hint: 移除固化文件
+> #### hint::移除固化文件
 > 硬件固化过一次后想要重新固化之前, 点击Download，选择上方的Erase FLASH，即可移除掉之前的固化文件，从而可以进行下一次的固化。
 > <center><img src="/img/lab2/pics/20.png" alt="42" style="zoom:70%;" /></center><center style="color:#0";>Remove Configuration Memory Device</center> 

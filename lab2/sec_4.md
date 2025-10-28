@@ -55,7 +55,13 @@
 
 然后点击上侧导航栏的Run, 这时 TD 将会依次执行 RTL 分析 (RTL Analysis), 综合 (Synthesis), 实现 (Implementation) 和 生成比特流文件 (Generate Bitstream) 四个步骤. 最终生成的比特流文件用于 FPGA 的配置.
 
-等待 TD 运行一段时间后, 可以看到弹出的比特流下载成功提示窗口, 关闭该窗口. 
+等待 TD 运行一段时间后, 可以看到弹出的提示窗口, 表明比特流文件生成成功，关闭该窗口. 
+
+<!-- -->
+> #### hint::出错了？
+> 初次综合生成可能会有提示：
+> `"ERROR:Cannot find license file .../Anlogic/TD5.6.2/license/Anlogic.lic"`
+> 这是因为TD软件没有找到license文件，相当于软件没有激活，把提供的Anlogic.lic放到它提示的文件夹（你的TD安装目录即可），之后再次综合生成应该就正常了
 
 <center><img src="/img/lab2/pics/10.png" alt="31" style="zoom:73%;" /></center><center style="color:#0";>比特流下载成功提示窗口</center>
 
@@ -89,6 +95,8 @@
 
 <center><img src="/img/lab2/pics/18.png" alt="36" style="zoom:70%;" /></center><center style="color:#0";>每次下载前记得检查比特流文件路径是否有误</center>
 
+如果在Bit文件选择的时候，发现没有识别到FPGA开发板，请参考[JTAG驱动安装](#JTAG驱动安装)
+
 <!-- -->
 > #### hint::TD 的工程目录结构
 > 为了更好地帮助你找到工程中的文件(如日志文件,比特流文件等), 这里有必要简单介绍一下 TD 默认的工程目录结构.
@@ -109,3 +117,14 @@
 
 <!-- -->
 
+### JTAG驱动安装
+
+初次下载比特流到FPGA上的时候，有可能会发现没有找到FPGA板子，原因是没有添加驱动。在windows的设备管理器的串行总线设备中，你可能会发现有有一个设备是这样：
+
+<center><img src="/img/lab2/pics/21.png" alt="29" style="zoom:70%;" /></center>
+
+这个时候，你需要右键：更新驱动程序-浏览我的电脑以查找驱动程序，选择Anlogic TD的安装目录下的Driver文件夹`".../Anlogic/TD5.6.2/driver"`，勾选包括子文件夹，之后它会自动找到驱动，然后你会发现设备名称改变了：
+
+<center><img src="/img/lab2/pics/23.png" alt="29" style="zoom:70%;" /></center>
+
+这个时候，在TD里面重新打开Download，应该能找到设备了。
