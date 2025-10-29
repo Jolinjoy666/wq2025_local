@@ -6,20 +6,17 @@
 >
 > - 2025/10/26: 本指导书正式发布.
 > 
-> - 2025/10/26: 更新 <font color="red">LAB0</font> 和 <font color="red">LAB1</font>, 其余实验将在后续发布.
-> - 2025/10/27: 更新 <font color="red">LAB2</font>.
+> - 2025/10/26: 更新 <font color="red">LAB0</font> , 其余实验将在后续发布.
 
 <!-- -->
 
 > #### fread::关于本指导书的配套代码
-> 点击[此处](https://gitee.com/zhang-xiaomou/CortexM0_SoC)获取本指导书的配套代码, 文件夹名称为 CortexM0_SoC, <font color="red">请务必将该文件夹放在英文路径下</font>.
+> 点击[此处](https://github.com/UESTC-ICSDLab/CortexM0_SoC/tree/main/code25)获取本指导书的配套代码, 文件夹名称为 CortexM0_SoC, <font color="red">请务必将该文件夹放在英文路径下</font>.
 > 本指导书中实验与代码文件的对应关系:
 
 > | 实验名称 | 对应代码文件夹 |
 > | ---- | ---- |
 > | LAB0 - 工欲善其事 必先利其器 | Task0 |
-> | LAB1 - "施法"让 CPU 动起来 | Task1 |
-> | LAB2 - "点石成金" - 实现你的首个 SoC | Task2 |
 
 
 <!-- -->
