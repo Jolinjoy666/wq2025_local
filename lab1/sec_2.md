@@ -21,7 +21,7 @@ Keil 是一款用于 ARM 架构处理器开发的 SDK 软件, 支持灵活丰富
 
 为新建的工程添加源代码文件, 右键 Source Group 1, 选择 "Add Existing Files to Group 'Source Group 1'", 将 "/Task1/keil/" 文件夹下的汇编文件 "startup_CMSDK_CM0.s" 添加进来.
 
-> #### question::没找到这个文件？
+> #### question::什么？我怎么没找到这个文件？
 > 
 > 是不是没有把文件类型更改为 All files.
 
