@@ -11,11 +11,15 @@
 > - 2025/11/01: 更新 <font color="red">LAB1</font>.
 > 
 > - 2025/11/05: 本周进行 LAB1 实验，请大家仔细阅读本页面, 获取 LAB1 的配套代码以及实验报告模板. 实验报告截止日期为<font color="red"> 11 月 19 日中午 12 点</font>, 请大家在这个日期之前提交实验报告到对应助教的邮箱中, 并完成实验报告上要求填写的内容, 过期提交或未交将会扣除相应的实验平时分. 实验报告和邮件主题都请按照以下方法命名后提交: <font color="red">学号-姓名-第几次实验</font>.
+> 
+> - 2025/11/05: 请同学们将 LAB1.1 中汇编程序的运行过程录屏, 时长限制在 30s 内, 然后在<font color="red"> 11 月 11 日 23:59 分前</font>将录屏提交到对应助教的邮箱中, 命名格式为: <font color="red">学号-姓名-LAB1.1</font>.
+> 
+> - 2025/11/07: 更新<font color="red">代码仓库备用链接</font>, 之前链接无法进入的同学可以点击[此处](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25)获取代码和实验报告模板.
 
 <!-- -->
 
 > #### fread::关于本指导书的配套代码
-> 点击[此处](https://github.com/UESTC-ICSDLab/CortexM0_SoC/tree/main/code25)获取本指导书的配套代码, 文件夹名称为 CortexM0_SoC, <font color="red">请务必将该文件夹放在英文路径下</font>.
+> 点击[此处](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25)或[此处](https://github.com/UESTC-ICSDLab/CortexM0_SoC/tree/main/code25)获取本指导书的配套代码, 文件夹名称为 CortexM0_SoC/code25, <font color="red">请务必将该文件夹放在英文路径下</font>.
 > 本指导书中实验与代码文件的对应关系:
 
 > | 实验名称 | 对应代码文件夹 |
