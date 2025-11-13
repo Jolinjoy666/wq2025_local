@@ -16,6 +16,8 @@
     * [1.1 运行吧, 第一个汇编程序](lab1/sec_3.md)
     * [1.2 栈 - 函数调用的指挥官](lab1/sec_5.md)
     * [1.2 自己动手, 理解函数调用](lab1/sec_6.md)
+* [LAB2: "点石成金" - 实现你的首个 SoC](lab1/introduction.md)
+    * [2.1.2 本实验的AHB-Lite总线介绍](lab2/sec_7.md)
 * [附录](verilog/introduction.md)
     * [Verilog基本语法](verilog/grammar.md)
     * [使能信号](verilog/enable_signal.md)
