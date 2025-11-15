@@ -14,7 +14,7 @@ TD 的软件界面如上图. 最上方为工具栏, 依次为 File、Edit、Proj
 
 > #### note::有关 TD 的具体使用
 >
-> 在 LAB2 的[下载比特流到 FPGA](../lab2/sec_4.md)中, 有关于 TD 在本实验中的具体用法.
+> 在 LAB3 的[下载比特流到 FPGA](../lab3/downloadbitstream.md)中, 有关于 TD 在本实验中的具体用法.
 
 <!--  -->
 

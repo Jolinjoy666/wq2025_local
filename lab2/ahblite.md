@@ -1,10 +1,8 @@
-# 本实验的AHB-Lite总线介绍
-
-## AHB-Lite 总线介绍
+# AHB-Lite 总线介绍
 
 Cortex-M0 处理器中所使用的是 AHB-Lite 总线，其结构示意图如下图所示，其包括一个主机（Master）、若干个从机（Slave），一个译码器（Decoder）用于选择对应的从机以及一个选通开关（MUX）用于选择对应的返回数据。这种总线结构极为简化，因只支持单一的主机而简化掉了总线仲裁等一系列复杂的机制，总线的传输机制也有较大的简化。因此被冠以 Lite 的后缀。
 
-<center><img src="/img/lab2/AHB-Lite 总线示意图.png" alt="AHB-Lite总线结构" style="zoom:80%;" /></center><center style="color:#0";>AHB-Lite 总线示意图</center> 
+<center><img src="/img/lab2/53.png" alt="AHB-Lite总线结构" style="zoom:80%;" /></center><center style="color:#0";>AHB-Lite 总线示意图</center> 
 
 ## AHB-Lite 总线的细节
 
@@ -43,27 +41,27 @@ assign HBURST[0] = 1'b0;
 
 #### 基本读操作
 
-<center><img src="/img/lab2/基本读操作.png" alt="基本读操作时序" style="zoom:80%;" /></center><center style="color:#0";>基本读操作</center> 
+<center><img src="/img/lab2/48.png" alt="基本读操作时序" style="zoom:80%;" /></center><center style="color:#0";>基本读操作</center> 
 
 当 Master 需要从外设读取数据时，总共需要经历两个阶段：Address phase & Data phase，因此一次读传输至少需要 2 cycle。在 Address phase 时，Master 会把读取地址输出在地址总线上，直到 HREADY 为 '1'。由于 HREADY 一直为 '1'，那么 Master 在 Address phase 放出地址后直接进入 Data phase；在 Data phase 时，Master 会在 HREADY 为 '1' 时读取数据总线 HRDATA 上的数据，至此传输完成。
 
 #### 基本写操作
 
-<center><img src="/img/lab2/基本写操作.png" alt="基本写操作时序" style="zoom:80%;" /></center><center style="color:#0";>基本写操作</center> 
+<center><img src="/img/lab2/49.png" alt="基本写操作时序" style="zoom:80%;" /></center><center style="color:#0";>基本写操作</center> 
 
 类似基本读操作，写操作也会经历两个阶段：在 Address phase 时，Master 会把写地址输出在地址总线上，直到 HREADY 为 '1'。由于 HREADY 一直为 '1'，那么 Master 在 Address phase 放出地址后直接进入 Data phase；在 Data phase 时，Master 会将写数据放在数据总线 HWDATA 上，直到 HREADY 为 '1'，传输完成。
 
 #### 具有等待状态的读写操作
 
-<center><img src="/img/lab2/具有等待状态的读操作.png" alt="具有等待状态的读操作" style="zoom:80%;" /></center><center style="color:#0";>具有等待状态的读操作</center> 
+<center><img src="/img/lab2/50.png" alt="具有等待状态的读操作" style="zoom:80%;" /></center><center style="color:#0";>具有等待状态的读操作</center> 
 
-<center><img src="/img/lab2/具有等待状态的写操作.png" alt="具有等待状态的写操作" style="zoom:80%;" /></center><center style="color:#0";>具有等待状态的写操作</center> 
+<center><img src="/img/lab2/51.png" alt="具有等待状态的写操作" style="zoom:80%;" /></center><center style="color:#0";>具有等待状态的写操作</center> 
 
 HREADY 为当前正在进行传输的 Slave 返回的 HREADYOUT，Master 端会把 HREADY 既作为进入传输的判断条件（在 HREADY 为 '0' 时不会开始下一个传输），也会作为传输完成的条件（在 HREADY 为 '0' 时不会退出当前传输）。
 
 总线是流水线结构，虽然对于一次传输至少需要两个 cycle，但是对于两次传输，例如把上图中的 A 与 B 看作两次传输，图中的 Address phase 为写传输 A 的地址阶段，图中的 Data phase 为 A 的数据阶段，但也同时作为读传输 B 的地址阶段。B 地址对应的外设在 Data phase 的第一个周期时，由于 HREADY 为 0，并不能进入传输，而在第二个周期时，对于 B 而言与图中 A 的 Address phase 无异，最终实现如下图所示的流水线传输。
 
-<center><img src="/img/lab2/总线流水操作.png" alt="总线流水操作" style="zoom:80%;" /></center><center style="color:#0";>总线流水操作</center> 
+<center><img src="/img/lab2/52.png" alt="总线流水操作" style="zoom:80%;" /></center><center style="color:#0";>总线流水操作</center> 
 
 对于 Slave 而言，HREADY 只需要作为进入传输的判断条件，因为进入传输后，HREADY 就会被切换到自己的输出 HREADOUT 上，因此当 Slave 根据 HREADY 等信号进入传输状态后，自行控制传输结束的时间，并依此控制 HREADYOUT 输出。
 
@@ -71,7 +69,7 @@ HREADY 为当前正在进行传输的 Slave 返回的 HREADYOUT，Master 端会�
 
 ## 本实验需要完成的SoC中总线介绍
 
-<center><img src="/img/lab2/SoC系统.png" alt="SoC系统结构" style="zoom:80%;" /></center><center style="color:#0";>本实验SoC系统结构</center> 
+<center><img src="/img/lab2/54.png" alt="SoC系统结构" style="zoom:80%;" /></center><center style="color:#0";>本实验SoC系统结构</center> 
 
 <!-- -->
 > #### fread::我需要做什么 ?

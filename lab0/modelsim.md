@@ -14,5 +14,5 @@ Modelsim 的软件界面如下图所示, 主要由工具栏、模块列表和波
 
 > #### note::有关 modelsim 的具体使用
 >
-> 在 LAB2 的[Modelsim 仿真](../lab2/sec_3.md)中, 有关于 modelsim 在本实验中的具体用法.
+> 在 LAB2 的[Modelsim 仿真](../lab2/modelsim.md)中, 有关于 modelsim 在本实验中的具体用法.
 
