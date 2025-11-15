@@ -15,6 +15,8 @@
 > - 2025/11/05: 请同学们将 LAB1.1 中汇编程序的运行过程录屏, 时长限制在 30s 内, 然后在<font color="red"> 11 月 11 日 23:59 分前</font>将录屏提交到对应助教的邮箱中, 命名格式为: <font color="red">学号-姓名-LAB1.1</font>.
 > 
 > - 2025/11/07: 更新<font color="red">代码仓库备用链接</font>, 之前链接无法进入的同学可以点击[此处](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25)获取代码和实验报告模板.
+> 
+> - 2025/11/15: 更新 <font color="red">LAB2</font>.
 
 <!-- -->
 
@@ -26,6 +28,7 @@
 > | ---- | ---- |
 > | LAB0 - 工欲善其事 必先利其器 | Task0 |
 > | LAB1 - "施法"让 CPU 动起来 | Task1 |
+> | LAB2 - "点石成金" - 实现你的首个 SoC | Task2 |
 
 
 <!-- -->
