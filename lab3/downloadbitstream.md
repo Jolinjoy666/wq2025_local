@@ -61,7 +61,7 @@
 > #### hint::出错了？
 > 初次综合生成可能会有提示：
 > `"ERROR:Cannot find license file .../Anlogic/TD5.6.2/license/Anlogic.lic"`
-> 这是因为 TD 软件没有找到 license 文件, 相当于软件没有激活, 把提供的 Anlogic.lic 放到它提示的文件夹(你的 TD 安装目录下的 license 文件夹里面即可), 之后再次综合生成应该就正常了. Anlogic.lic 位于 Task2 文件夹中.
+> 这是因为 TD 软件没有找到 license 文件, 相当于软件没有激活, 把提供的 Anlogic.lic 放到它提示的文件夹(你的 TD 安装目录下的 license 文件夹里面即可), 之后再次综合生成应该就正常了. Anlogic.lic 位于 Task3 文件夹中.
 
 <center><img src="/img/lab2/pics/10.png" alt="31" style="zoom:73%;" /></center><center style="color:#0";>比特流下载成功提示窗口</center>
 
