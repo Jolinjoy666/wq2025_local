@@ -6,9 +6,30 @@ Cortex-M0 处理器中所使用的是 AHB-Lite 总线，其结构示意图如下
 
 ## AHB-Lite 总线的细节
 
+### AHB-Lite 互连结构
+
+在开头的示意图中，我们看到 AHB-Lite 总线除了主机和从机之外，还包括用于地址译码和数据选通的译码器和选通开关，它们在主机和从机的交互中作为中间的桥梁而存在，这一小节对整个 AHB-Lite 的互连结构做一个简单的介绍，简述译码器和选通开关的作用，具体工作原理可以见[2.1.3小节](address.md)。
+
+<center><img src="/img/lab2/60.png" alt="AHB-Lite Slave select signals" style="zoom:80%;" /></center>
+<center style="color:#0";>从机选择信号图</center> 
+
+在从机选择信号图中，主机输出的地址信号 HADDR 经过译码器被划分到不同的地址区域。译码器根据当前地址所属的区域，产生对应的从机选择信号 **HSELx**，从而“选中”某一个从机参与本次传输。
+
+<center><img src="/img/lab2/61.png" alt="AHB-Lite Multiplexor interconnection" style="zoom:80%;" /></center>
+<center style="color:#0";>选通开关互连图</center> 
+
+在选通开关互连图中，可以看到译码器为选通开关提供选择信号，被选中的从机通过选通开关将自己的返回信号接入总线：
+
+- 选中的从机的 **HRDATA** 被送到总线的 **HRDATA**；
+- 选中的从机的 **HRESP** 被送到总线的 **HRESP**；
+- 选中的从机的 **HREADYOUT** 被送到总线的 **HREADY**。
+
+因此，**全局的 HRDATA、HREADY、HRESP 信号实际上是“当前被访问的从机的 HRDATA、HREADY_OUT、HRESP 信号通过多路选择电路选通得到的**。我们后文中的信号，默认都是这些经过选通开关的全局信号。如果你看到了 HREADY_OUTx、HRDATAx 这种信号，要明白这是某个从机自身发出的信号。
+
+
 ### 部分接口介绍
 
-除了上图中的信号外，AHB-Lite 还有部分重要的接口信号。这些接口对于设计 SoC 的总线协议非常重要，下面我们简要介绍 Cortex-M0 处理器中的总线接口信号：
+这一节简要介绍了 Cortex-M0 处理器中的部分总线接口信号，这些信号对于设计 SoC 的总线协议非常重要：
 
 | 名称 | 来源 | 描述 |
 | ---- | ---- | ---- |
@@ -19,7 +40,7 @@ Cortex-M0 处理器中所使用的是 AHB-Lite 总线，其结构示意图如下
 | HWDATA[31:0] | Master | 核发出的写数据 |
 | HWRITE | Master | 读写选择（1：写，0：读） |
 | HRDATA[31:0] | Slave | 外设返回的读数据 |
-| HREADOUT | Slave | 何时传输完成（通常为 1） |
+| HREADYOUT | Slave | 何时传输完成（通常为 1） |
 | HRESP | Slave | 传输是否成功（通常为 0） |
 
 ### Cortex-M0 支持的总线传输
@@ -63,7 +84,7 @@ HREADY 为当前正在进行传输的 Slave 返回的 HREADYOUT，Master 端会�
 
 <center><img src="/img/lab2/52.png" alt="总线流水操作" style="zoom:80%;" /></center><center style="color:#0";>总线流水操作</center> 
 
-对于 Slave 而言，HREADY 只需要作为进入传输的判断条件，因为进入传输后，HREADY 就会被切换到自己的输出 HREADOUT 上，因此当 Slave 根据 HREADY 等信号进入传输状态后，自行控制传输结束的时间，并依此控制 HREADYOUT 输出。
+对于 Slave 而言，HREADY 只需要作为进入传输的判断条件，因为进入传输后，HREADY 就会被切换到自己的输出 HREADYOUT 上，因此当 Slave 根据 HREADY 等信号进入传输状态后，自行控制传输结束的时间，并依此控制 HREADYOUT 输出。
 
 在后面 SoC 具体设计中，所有的 Slave 接口都能在两个周期内完成读写（即判断出 Address phase 后能在下一个周期完成数据读写），因此所有外设的 HREADYOUT 信号都被置为常量 '1'，这也是简化设计的一个体现。
 
