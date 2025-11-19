@@ -18,7 +18,7 @@
 > 
 > - 2025/11/15: 更新 <font color="red">LAB2</font>.
 >
-> - 2025/11/18: 本周进行 LAB2 实验, 请大家及时更新自己的[代码仓库](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25), 实验报告截止日期为<font color="red"> 11 月 26 日中午 12 点</font>.
+> - 2025/11/19: 本周进行 LAB2 实验, 请大家及时更新自己的[代码仓库](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25), 实验报告截止日期为<font color="red"> 11 月 26 日中午 12 点</font>.
 
 <!-- -->
 
