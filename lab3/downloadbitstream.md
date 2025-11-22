@@ -2,7 +2,7 @@
 
 上一实验中, 我们通过仿真验证了 SoC 的功能, 接下来我们将系统实现在 FPGA 上, 进行上板调试.
 
-打开 TD 软件, 点击 Project--New Project, 创建一个新的工程, 给工程命名为 "CortexM0_SoC", 工程文建立在 "/Task3/TD/" 文件夹下. 记得检查一下下方显示的工程路径是否合理, <font color="red">注意不能出现中文字体</font>. 选择 FPGA 芯片型号, 在 Device Family 栏处选择 EG4, 然后在下方列表中选择 EG4S20BG256.
+打开 TD 软件, 点击 Project--New Project, 创建一个新的工程, 给工程命名为 "CortexM0_SoC", 工程建立在 "/Task3/Count/TD/" 文件夹下. 记得检查一下下方显示的工程路径是否合理, <font color="red">注意不能出现中文字体</font>. 选择 FPGA 芯片型号, 在 Device Family 栏处选择 EG4, 然后在下方列表中选择 EG4S20BG256.
 
 <center><img src="/img/lab2/pics/1.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>创建文件与型号选择</center> 
 
@@ -10,13 +10,13 @@
 
 <center><img src="/img/lab2/pics/3.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>创建文件与型号选择</center> 
 
-进入源文件添加界面, 因为我们的设计源文件都在 "/Task3/rtl" 下, 所以这里右键点击 Hierarchy, 选择 ADD Sources 直接将 "/Task3/rtl" 目录添加进来. 点击 OK 即可添加成功.
+进入源文件添加界面, 因为我们的设计源文件都在 "/Task3/Count/rtl" 下, 所以这里右键点击 Hierarchy, 选择 ADD Sources 直接将 "/Task3/Count/rtl" 目录添加进来. 点击 OK 即可添加成功.
 
 <center><img src="/img/lab2/pics/4.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>添加源文件</center> 
 
 <center><img src="/img/lab2/pics/5.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>添加源文件</center> 
 
-右键 constraint_1（active）, 选择 Add ADC File 进入约束文件添加界面, 我们已经在 "/Task3/TD/" 中为你准备好了约束文件 "pin.xdc", 将这个文件添加进来即可.
+右键 constraint_1（active）, 选择 Add ADC File 进入约束文件添加界面, 我们已经在 "/Task3/Count/TD/" 中为你准备好了约束文件 "pin.xdc", 将这个文件添加进来即可.
 
 <center><img src="/img/lab2/pics/6.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>添加约束文件</center> 
 
