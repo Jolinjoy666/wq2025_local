@@ -140,10 +140,6 @@ GPIO            LDR R6, =0x00          ;GPIO INPUT ENABLE VALUE
                 STR R6, [R2]           ;store
                 MOVS R1, #1            ;Interval cnt initial
                 BL delay
-                LDR R6, =0X80          ;GPIO_7 Set value
-                STR R6, [R2]           ;store
-                MOVS R1, #1            ;Interval cnt initial
-                BL delay
                 B GPIO
 
 delay           ADDS R1, R1, #1
@@ -168,8 +164,8 @@ delay           ADDS R1, R1, #1
 
 由于 Keil 调试是进行的单步调试, 因此暂时不必对 R1 的值进行调整, 当前 R1 的值决定了每 30 步左右流水灯模式改变一次.
 
-将新编写的 verilog 文件添加进 TD 工程中, 将 GPIO[0:6] 分配到开发的 LED0-LED6 上, 同时为了验证输入功能将 GPIO7 约束到开关 SW1 上, 综合布局布线后生成比特流文件并下载进 FPGA 中.
+将新编写的 verilog 文件添加进 TD 工程中, 将 GPIO[0:6] 分配到开发的 LED0-LED6 上, 同时为了验证输入功能将 GPIO7 约束到开关 SW1 上(对应引脚为 A10), 综合布局布线后生成比特流文件并下载进 FPGA 中.
 
-按照实验二讲述的方法连接调试器与 PC , 打开 Keil 进行调试, 调试结果如下图所示. 在进行调试之前, 将开发板的拨码开关 SW1 往上拨, 使其连接到电源 VDD 上. 在单步调试到下图所示的 38 行代码, 读取 GPIO 输入的值时, 我们可以看到读取到的值存储到 R5 寄存器中, 其值是 0x00000080, 表示 GPIO7 输入的值为 1 , 符合实验现象. 接下来继续单步调试就能看到 LED0 至 LED6 依次点亮.
+按照前几小节讲述的方法连接调试器与 PC, 打开 Keil 进行调试, 调试结果如下图所示. 在单步调试到下图所示的 38 行代码, 读取 GPIO 输入的值时, 我们可以看到读取到的值存储到 R5 寄存器中. 接下来继续单步调试就能看到 LED0 至 LED6 依次点亮.
 
 <div align ="center"><img src="/img/lab3/15.png" alt="01" style="zoom:100%;" />
