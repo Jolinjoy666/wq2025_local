@@ -60,7 +60,7 @@
 > <center><img src="/img/lab2/62.png" alt="62" style="zoom:75%;" /></center><center style="color:#0";>菜单栏 Simulate > Start Simulation</center> 
 > <center><img src="/img/lab2/63.png" alt="63" style="zoom:75%;" /></center><center style="color:#0";> Optimization Options 选择</center> 
 > 
-> 如果怀疑之前的仿真由于优化选项导致问题，建议清除 work 库，去除所有的优化文件再重新仿真，避免加载原有优化文件导致仿真一直存在问题。清除 work 库很简单：打开 modelsim 文件夹，删除里面的 work 文件夹，再按照上面的方法重新编译所有的源文件。
+> 如果怀疑之前的仿真由于优化选项导致问题, 建议清除 work 库, 去除所有的优化文件再重新仿真, 避免加载原有优化文件导致仿真一直存在问题. 清除 work 库很简单：打开 modelsim 文件夹, 删除里面的 work 文件夹, 再按照上面的方法重新编译所有的源文件. 
 
 
 <!-- -->

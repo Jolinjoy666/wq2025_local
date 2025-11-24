@@ -11,7 +11,7 @@
 
 通用输入/输出接口(General-purpose input/output, GPIO), 是一种常用于处理器系统的外设接口, 其特点是具有输出/输入逻辑电平的功能.
 
-通俗地说, 就是一些引脚, 可以通过它们输出高低电平或者通过它们读入引脚的状态是高电平或是低电平. GPIO 是个比较重要的概念, 用户可以通过 GPIO 口和硬件进行数据交互 (如UART), 控制硬件工作 (如LED、蜂鸣器等), 读取硬件的工作状态信号 (如中断信号) 等. GPIO 口的使用非常广泛. 掌握了 GPIO, 差不多相当于掌握了操作硬件的能力.
+通俗地说, 就是一些引脚, 可以通过它们输出高低电平或者通过它们读入引脚的状态是高电平或是低电平. GPIO 是个比较重要的概念, 用户可以通过 GPIO 口和硬件进行数据交互 (如 UART), 控制硬件工作 (如 LED、蜂鸣器等), 读取硬件的工作状态信号 (如中断信号) 等. GPIO 口的使用非常广泛. 掌握了 GPIO, 差不多相当于掌握了操作硬件的能力.
 
 设计 GPIO 外设的目的就是为了提高 SoC 系统的通用性. 以单片机这一 SoC 系统为例, 单片机作为工业设备的控制核心, 往往需要驱动不同的芯片, 这些芯片的通信协议各不相同, SoC 设计人员不可能把每一种芯片的通信协议都制作成硬件的形式集成在 SoC 中. 因此, 设计 GPIO 外设, 让编程人员通过处理器控制 GPIO 接口模拟各个驱动芯片的通信时序以达到驱动各个外部芯片的功能. GPIO 接口能够避免没有特殊芯片的通信时序的尴尬.
 
@@ -75,7 +75,7 @@ assign P4_HSEL = (HADDR[31:4] == 28'h4000002) ? Port4_en : 1'd0;
 /***********************************/
 ```
 
-接下来, 需要在顶层模块中将 GPIO 总线接口与数据存储器总线接口分别与总线扩展模块的 P1、P4 端口连接, GPIO 外设和数据存储器以及它们的总线接口都已经在顶层模块 "CortexM0_SoC.v" 中例化完成, 只需要将其总线接口的连线部分补充完毕, 实现正确的端口连接.
+接下来, <font color="red">需要在顶层模块中将 GPIO 总线接口与数据存储器总线接口分别与总线扩展模块的 P1、P4 端口连接</font>, GPIO 外设和数据存储器以及它们的总线接口都已经在顶层模块 "CortexM0_SoC.v" 中例化完成, 只需要将其总线接口的连线部分补充完毕, 实现正确的端口连接.
 
 ## 汇编代码
 
@@ -92,7 +92,7 @@ assign P4_HSEL = (HADDR[31:4] == 28'h4000002) ? Port4_en : 1'd0;
 
 需要注意的是, 为了方便仿真观察, 我们将延迟的间隔时间设置得非常小, 在接下来的上板调试时, 需要重新修改 R0 的值, 使流水灯模式转换时间保持在 1s 左右.
 
-在汇编文件中补充代码段, 实现往左流的流水灯功能, 并且利用 R1 计数至 16 后返回实现delay功能.
+在汇编文件中补充代码段, 实现往左流的流水灯功能, 并且利用 R1 计数至 16 后返回实现 delay 功能.
 
 ```
 ; Finish function code 
@@ -105,22 +105,22 @@ assign P4_HSEL = (HADDR[31:4] == 28'h4000002) ? Port4_en : 1'd0;
 
 ```ARM
 ; Finish function code 
-GPIO            LDR R6, =0x00         ;GPIO INPUT ENABLE VALUE
-                STR R6, [R4]          ;Set input ENABLE
-                LDR R5, [R3]          ;read GPIO value
+GPIO            LDR R6, =0x00          ;GPIO INPUT ENABLE VALUE
+                STR R6, [R4]           ;Set input ENABLE
+                LDR R5, [R3]           ;read GPIO value
 
-                LDR R6, =0x01         ;GPIO OUTPUT ENABLE VALUE
-                STR R6, [R4]          ;Set OUTPUT ENABLE
+                LDR R6, =0x01          ;GPIO OUTPUT ENABLE VALUE
+                STR R6, [R4]           ;Set OUTPUT ENABLE
                 
-                LDR R6, =0X01         ;GPIO_0 Set value
-                STR R6, [R2]          ;store
-                MOVS R1, #1           ;Interval cnt initial
+                LDR R6, =0X01          ;GPIO_0 Set value
+                STR R6, [R2]           ;store
+                MOVS R1, #1            ;Interval cnt initial
                 BL delay
-                LDR R6, =0X02         ;GPIO_1 Set value
-                STR R6, [R2]          ;store
-                MOVS R1, #1           ;Interval cnt initial
+                LDR R6, =0X02          ;GPIO_1 Set value
+                STR R6, [R2]           ;store
+                MOVS R1, #1            ;Interval cnt initial
                 BL delay
-                LDR R6, =0X04         ;GPIO_2 Set value
+                LDR R6, =0X04          ;GPIO_2 Set value
                 STR R6, [R2]           ;store
                 MOVS R1, #1            ;Interval cnt initial
                 BL delay
@@ -146,27 +146,29 @@ GPIO            LDR R6, =0x00         ;GPIO INPUT ENABLE VALUE
                 BL delay
                 B GPIO
 
-delay           ADDS R1,R1,#1
-                LDR R0,=0X10
-                CMP R0,R1
+delay           ADDS R1, R1, #1
+                LDR R0, =0X10
+                CMP R0, R1
                 BNE delay
                 BX  LR
 ;;;;;;;;;;;;;;;;;;;;;;
 ```
 
-从上面的示例代码中, 我们在代码的一开始还将 GPIO 配置成输入模式, 以检验 GPIO 的输入功能, 这一功能可以在 FPGA开发板中验证中得到检验.
+从上面的示例代码中, 我们在代码的一开始还将 GPIO 配置成输入模式, 以检验 GPIO 的输入功能.
 
 ## 系统仿真和调试
 
 ### ModelSim 仿真
 
-按照实验一所述, 新建 modelsim 工程, 将之前编写的 verilog 文件添加进工程, 编译并开始仿真, 观察波形, 可以看到每个一段时间, GPIO 的输出都会左移一位, 将这些接口接到开发板的 LED 灯上, 就构成了左向流水灯.
+按照实验一所述, 新建 modelsim 工程, 将之前编写的 verilog 文件添加进工程, 编译并开始仿真, 观察波形, 可以看到每隔一段时间, GPIO 的输出都会左移一位, 将这些接口接到开发板的 LED 灯上, 就构成了左向流水灯.
+
+<center><img src="/img/lab3/25.jpg" alt="20" style="zoom:60%;" /></center><center style="color:#0";>仿真波形</center> 
 
 ### 硬件调试
 
 由于 Keil 调试是进行的单步调试, 因此暂时不必对 R1 的值进行调整, 当前 R1 的值决定了每 30 步左右流水灯模式改变一次.
 
-将新编写的 verilog 文件添加进 TD 工程中, 将 GPIO[0:6] 分配到开发的 LED0-LED6 上, 同时为了验证输入功能将GPIO7 约束到开关 SW1 上, 综合布局布线后生成比特流文件并下载进 FPGA 中.
+将新编写的 verilog 文件添加进 TD 工程中, 将 GPIO[0:6] 分配到开发的 LED0-LED6 上, 同时为了验证输入功能将 GPIO7 约束到开关 SW1 上, 综合布局布线后生成比特流文件并下载进 FPGA 中.
 
 按照实验二讲述的方法连接调试器与 PC , 打开 Keil 进行调试, 调试结果如下图所示. 在进行调试之前, 将开发板的拨码开关 SW1 往上拨, 使其连接到电源 VDD 上. 在单步调试到下图所示的 38 行代码, 读取 GPIO 输入的值时, 我们可以看到读取到的值存储到 R5 寄存器中, 其值是 0x00000080, 表示 GPIO7 输入的值为 1 , 符合实验现象. 接下来继续单步调试就能看到 LED0 至 LED6 依次点亮.
 

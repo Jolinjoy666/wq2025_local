@@ -1,6 +1,10 @@
 # 硬件流水灯
 
 <!-- -->
+> #### important::注意事项
+> 本节作为<font color=red>选做内容</font>, <font color=red>不计入实验成绩</font>, 有兴趣的同学可以参照教程实现硬件流水灯. 
+
+<!-- -->
 > #### flag::硬件流水灯
 > 这一节将介绍硬件流水灯的实现方式, 使用硬件来延迟和控制输出, 处理器只需要控制延迟信息和流水灯端口的输出模式, 对应的硬件按照这两个控制信息来执行相应的输出.
 
@@ -37,10 +41,10 @@
 //------------------------------------------------------
 always@(*) begin
     case(WaterLight_mode)
-    8'h01 : begin LED = mode1;end  
-    8'h02 : begin LED = mode2;end
-    8'h03 : begin LED = mode3;end
-    default : begin LED = 8'h00;end
+    8'h01 : begin LED = mode1; end  
+    8'h02 : begin LED = mode2; end
+    8'h03 : begin LED = mode3; end
+    default : begin LED = 8'h00; end
     endcase
 end
 ```
@@ -53,7 +57,7 @@ end
 
 第二步, 在 "AHBlite_Decoder.v" 中 WaterLight (Port 2) 端口参数将其使能.
 
-第三步, 根据之前所述的 memory map , WaterLight 的总线编码为 0x40000000-0x4000000f , 因为对于一次总线操作, 只要地址总线的高 28 位为 0x4000000 , 则Decoder 认为这是一次对流水灯的操作, 进而生成流水灯总线选择信号. 在译码部分插入流水灯的译码器代码.
+第三步, 根据之前所述的 memory map , WaterLight 的总线编码为 0x40000000-0x4000000f , 因为对于一次总线操作, 只要地址总线的高 28 位为 0x4000000 , 则 Decoder 认为这是一次对流水灯的操作, 进而生成流水灯总线选择信号. 在译码部分插入流水灯的译码器代码.
 
 ```verilog
 //0x40000000 WaterLight MODE
@@ -81,7 +85,7 @@ assign P2_HSEL = (HADDR[31:4] == 28'h4000000) ? Port2_en : 1'b0;
 
 按照实验二所述, 新建 keil 工程, 编写汇编程序, 让流水灯流起来.
 
-在 "/Task3/WaterLight/keil/startup_CMSDK_CM0.s" 文件中, 程序进入 WaterLight 段后, R0 存储流水灯模式, R1 存储模式转换计数器地址, R2 存储流水灯模式寄存器地址, R4存储计数器时间.当流水灯切换到当前模式后, 程序跳转至 delay 段开始计时, 流水灯模式保持不变z直到计数器计时完成, 程序返回, 流水灯模式改变, 循环往复.
+在 "/Task3/WaterLight/keil/startup_CMSDK_CM0.s" 文件中, 程序进入 WaterLight 段后, R0 存储流水灯模式, R1 存储模式转换计数器地址, R2 存储流水灯模式寄存器地址, R4 存储计数器时间. 当流水灯切换到当前模式后, 程序跳转至 delay 段开始计时, 流水灯模式保持不变 z 直到计数器计时完成, 程序返回, 流水灯模式改变, 循环往复.
 
 需要注意的是, 为了方便仿真观察, 我们将流水灯模式转换间隔时间设置得非常小, 在接下来的上板调试时, 需要重新修改 R4 的值, 使流水灯模式转换时间保持在 10s 左右.
 

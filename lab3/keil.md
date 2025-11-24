@@ -15,7 +15,7 @@
 
 2. 在 1 的基础上, 打开 PC 的设备管理器的端口一栏, 确保 PC 上检测到了调试数据线所连接的端口, 且端口准备就绪. 这样才可以保证 PC 与调试端口能够顺利连接.
 
-<center><img src="/img/lab2/35.png" alt="35" style="zoom:100%;" /></center><center style="color:#0";>正常情况下 PC 应当检测到两个端口</center> 
+<center><img src="/img/lab3/24.png" alt="35" style="zoom:100%;" /></center><center style="color:#0";>正常情况下 PC 应当检测到两个端口</center> 
 
 点击进入 Debug 页面右上角的 settings 进入调试器的设置, 注意选择调试接口为 SW, 这时会看到右侧出现了调试器的设备 ID 和名称, 说明已经成功建立连接, 点击 OK 完成连接. <font color=red>若右侧显示未找到设备或连接失败, 则再次确认上述两个连接条件, 或尝试拔下数据线再重新插上.</font>
 

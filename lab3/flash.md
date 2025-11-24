@@ -6,7 +6,7 @@
 
 在 TD 的 FPGA Flow 栏中点击 Download 进入设置界面, 点击设置界面的 MODE, 将其进行下拉, 将 JTAG 换成 PROGRAM FLASH, 选择好 bin 文件后, 点击 OK 开始 FLASH 的配置, 这里需要等待的时间稍微有点长. 当进度条加载完毕后, 硬件逻辑就被成功配置到 FLASH 里了. <font color=red>如果没有见效, 不要着急, 可以尝试按下 FPGA 开发板上的复位键并等待 LINK 指示灯熄灭</font>. 这样就成功的固化在 FPGA 上面了. 
 
-<center><img src="/img/lab2/pics/19.png" alt="42" style="zoom:70%;" /></center><center style="color:#0";>Remove Configuration Memory Device</center> 
+<center><img src="/img/lab3/22.png" alt="42" style="zoom:70%;" /></center><center style="color:#0";>Remove Configuration Memory Device</center> 
 
 <!-- -->
 
@@ -30,4 +30,4 @@
 <!-- -->
 > #### hint::移除固化文件
 > 硬件固化过一次后想要重新固化之前, 点击 Download, 选择上方的 Erase FLASH, 即可移除掉之前的固化文件, 从而可以进行下一次的固化.
-> <center><img src="/img/lab2/pics/20.png" alt="42" style="zoom:70%;" /></center><center style="color:#0";>Remove Configuration Memory Device</center> 
+> <center><img src="/img/lab3/23.png" alt="42" style="zoom:70%;" /></center><center style="color:#0";>Remove Configuration Memory Device</center> 
