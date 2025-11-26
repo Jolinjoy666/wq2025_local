@@ -2,6 +2,10 @@
 
 上一实验中, 我们通过仿真验证了 SoC 的功能, 接下来我们将系统实现在 FPGA 上, 进行上板调试.
 
+<!-- -->
+> #### important::注意事项
+> 本实验的前置流程请参考[2.2.1 硬件部分说明](../lab2/rtl.md)以及[2.2.2 搭建 Keil 工程](../lab2/keilproj.md), 注意修改"/Task3/Count/rtl/Block_RAM.v"中 RAM 初始化文件的路径.
+
 打开 TD 软件(推荐使用 5.6.2 版本), 点击 Project--New Project, 创建一个新的工程, 给工程命名为 "CortexM0_SoC", 工程建立在 "/Task3/Count/TD/" 文件夹下. 记得检查一下下方显示的工程路径是否合理, <font color="red">注意不能出现中文字体</font>. 选择 FPGA 芯片型号, 在 Device Family 栏处选择 EG4, 然后在下方列表中选择 EG4S20BG256.
 
 <center><img src="/img/lab2/pics/1.png" alt="20" style="zoom:60%;" /></center><center style="color:#0";>创建文件与型号选择</center> 

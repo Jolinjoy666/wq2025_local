@@ -19,6 +19,8 @@
 > - 2025/11/15: 更新 <font color="red">LAB2</font>.
 >
 > - 2025/11/19: 本周进行 LAB2 实验, 请大家及时更新自己的[代码仓库](https://gitee.com/fmq03/CortexM0_SoC/tree/main/code25), 实验报告截止日期为<font color="red"> 11 月 26 日中午 12 点</font>.
+>
+> - 2025/11/26: 更新 <font color="red">LAB3</font>. 本周进行 LAB3 实验, 实验报告截止日期为<font color="red"> 12 月 3 日中午 12 点</font>.
 
 <!-- -->
 
@@ -31,6 +33,7 @@
 > | LAB0 - 工欲善其事 必先利其器 | Task0 |
 > | LAB1 - "施法"让 CPU 动起来 | Task1 |
 > | LAB2 - "点石成金" - 实现你的首个 SoC | Task2 |
+> | LAB3 - "灯, 等灯, 等灯"-流水灯的几种点法 | Task3 |
 
 
 <!-- -->

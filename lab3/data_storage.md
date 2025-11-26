@@ -21,7 +21,7 @@
 
 参考实验二添加 RAMCODE 步骤. 在顶层模块中已经添加好 RAMDATA 总线接口以及对应的 Block RAM , 需要将 RAMDATA 总线接口接入总线扩展模块中预留的 P1 接口.
 
-第一步, 在 "AHBlite_Decoder.v" 中的 RAMDATA (Port 1) 端口参数将其使能.
+第一步, 在 "GPIO/rtl/AHBlite_Decoder.v" 中的 RAMDATA (Port 1) 端口参数将其使能.
 
 ```verilog
 /*RAMDATA enable parameter*/
@@ -37,7 +37,7 @@ parameter Port1_en = 1,
 /************************/
 ```
 
-第二步, 根据存储系统章节所述的 memory map 推荐地址分配, 我们在地址 0x20000000 分配了一个 512KB 的RAMDATA.所以 RAMDATA 的总线编码为 0x20000000-0x2000ffff , 因为对于一次总线操作, 只要地址总线的高 16 位为 0x2000 , 则Decoder 认为这是一次对数据存储器的操作, 进而生成数据存储器总线选择信号. 在译码部分插入 RAMDATA 的译码器代码.
+第二步, 根据存储系统章节所述的 memory map 推荐地址分配, 我们在地址 0x20000000 分配了一个 512KB 的RAMDATA.所以 RAMDATA 的总线编码为 0x20000000-0x2000ffff , 因为对于一次总线操作, 只要地址总线的高 16 位为 0x2000 , 则 Decoder 认为这是一次对数据存储器的操作, 进而生成数据存储器总线选择信号. 在译码部分插入 RAMDATA 的译码器代码.
 
 ```verilog
 //0x20000000-0x2000ffff
