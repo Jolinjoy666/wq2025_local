@@ -6,17 +6,17 @@
 
 ### 外设简介
 
-数码管显示的具体代码见工程文件夹下 "Segdisp.v、seg_led_decoder.v、seg_sel_decoder.v" 文件.
+数码管显示的具体代码见 "Task4/key_led/rtl" 文件夹下 "Segdisp.v、seg_led_decoder.v、seg_sel_decoder.v" 文件.
 
 由于所有按键连接到同一个中断端口, 因此键盘外设除了基本的消抖检测模块以外, 还需要使用一个寄存器组将被按下的键盘的序号记录下来. 本节用到了矩阵键盘的全部按键, 因此不能像上一个实验中为了使用某一行的 4 个按键, 将该行的行信号线拉低. 为了实现对矩阵键盘全部 16 个按键的检测, 需要进行扫描. 
 
 由于 FPGA 板载时钟频率为 50MHz, 所以还需要先对时钟信号分频得到扫描时钟信号, 按扫描时钟信号周期性地改变行信号线的值. 当第一行行信号线为低电平时, 此时检测列信号的值便可判断出是第一行的某个按键被按下. 以此类推, 使用这种扫描方法可以检测矩阵键盘 16 个按键中是哪一个按键被按下. 除了扫描模块以外, 键盘模块还包括消抖模块和记录按键信息的寄存器组. 
 
-最后实现的键盘外设模块中, 把每个按键的脉冲信号 key_pulse 通过或运算以后, 得到键盘中断信号key_interrupt. 只要有一个按键被按下, 中断信号都将产生一个脉冲, 使CPU进入中断处理程序. 
+最后实现的键盘外设模块中, 把每个按键的脉冲信号 key_pulse 通过或运算以后, 得到键盘中断信号 key_interrupt. 只要有一个按键被按下, 中断信号都将产生一个脉冲, 使 CPU 进入中断处理程序. 
 
 <!-- -->
 > #### hint::提示
-> 可以看出, 本节介绍的方法中中断信号和上一节中的有很大不同, 应当认真体会!
+> 可以看出, 本节介绍的方法中的中断信号和上一节中的有很大不同, 应当认真体会!
 
 ### SoC硬件部分
 
@@ -26,7 +26,7 @@
 wire [31:0] IRQ;
 wire [3:0] key_interrupt;
 /*Connect the IRQ with keyboard*/
-assign IRQ = {28'b0,key_interrupt};
+assign IRQ = {28'b0, key_interrupt};
 /***************************/
 ```
 
@@ -36,7 +36,7 @@ assign IRQ = {28'b0,key_interrupt};
 wire [31:0] IRQ;
 wire key_interrupt;
 /*Connect the IRQ with keyboard*/
-assign IRQ = {31'd0,key_interrupt};
+assign IRQ = {31'd0, key_interrupt};
 /***************************/
 ```
 
@@ -49,10 +49,10 @@ assign IRQ = {31'd0,key_interrupt};
 修改__Vector中断向量表如下：
 
 ```cpp
-__Vectors     DCD     __initial_sp              ; Top of Stack
-                DCD     Reset_Handler             ; Reset Handler
-                DCD     0			               ; NMI Handler
-                DCD     0				          ; Hard Fault Handler
+__Vectors     DCD     __initial_sp                 ; Top of Stack
+                DCD     Reset_Handler              ; Reset Handler
+                DCD     0                          ; NMI Handler
+                DCD     0                          ; Hard Fault Handler
                 DCD     0                          ; Reserved
                 DCD     0                          ; Reserved
                 DCD     0                          ; Reserved
@@ -60,12 +60,12 @@ __Vectors     DCD     __initial_sp              ; Top of Stack
                 DCD     0                          ; Reserved
                 DCD     0                          ; Reserved
                 DCD     0                          ; Reserved
-                DCD     0			               ; SVCall Handler
+                DCD     0                          ; SVCall Handler
                 DCD     0                          ; Reserved
                 DCD     0                          ; Reserved
-                DCD     0            			; PendSV Handler
-                DCD     0          				; SysTick Handler
-                DCD     Keyboard_Handler        ; IRQ0 Handler
+                DCD     0                          ; PendSV Handler
+                DCD     0                          ; SysTick Handler
+                DCD     Keyboard_Handler           ; IRQ0 Handler
 ```
 
 现在只有一个中断服务函数, 因此还需要修改中断服务函数的入口:
@@ -73,34 +73,34 @@ __Vectors     DCD     __initial_sp              ; Top of Stack
 ```c
 KEY0_Handler    PROC
                 EXPORT KEY0_Handler            [WEAK]
-			   IMPORT KEY0
-			   PUSH	{R0,R1,R2,LR}
-                BL		KEY0
-			   POP		{R0,R1,R2,PC}
+                IMPORT KEY0
+                PUSH   {R0,R1,R2,LR}
+                BL     KEY0
+                POP    {R0,R1,R2,PC}
                 ENDP
 
 KEY1_Handler    PROC
                 EXPORT KEY1_Handler            [WEAK]
-			   IMPORT KEY1
-			   PUSH	{R0,R1,R2,LR}
-                BL		KEY1
-			   POP		{R0,R1,R2,PC}
+                IMPORT KEY1
+                PUSH   {R0,R1,R2,LR}
+                BL     KEY1
+                POP    {R0,R1,R2,PC}
                 ENDP
 
 KEY2_Handler    PROC
                 EXPORT KEY2_Handler            [WEAK]
-			   IMPORT KEY2
-			   PUSH	{R0,R1,R2,LR}
-                BL		KEY2
-			   POP		{R0,R1,R2,PC}
+                IMPORT KEY2
+                PUSH   {R0,R1,R2,LR}
+                BL     KEY2
+                POP    {R0,R1,R2,PC}
                 ENDP
 
 KEY3_Handler    PROC
                 EXPORT KEY3_Handler            [WEAK]
-			   IMPORT KEY3
-			   PUSH	{R0,R1,R2,LR}
-                BL		KEY3
-			   POP		{R0,R1,R2,PC}
+                IMPORT KEY3
+                PUSH   {R0,R1,R2,LR}
+                BL     KEY3
+                POP    {R0,R1,R2,PC}
                 ENDP
 ```
 
@@ -109,10 +109,10 @@ KEY3_Handler    PROC
 ```
 Keyboard_Handler    PROC
                     EXPORT Keyboard_Handler            [WEAK]
-			       IMPORT KEY_ISR
-			       PUSH	{R0,R1,R2,LR}
-                    BL		KEY_ISR
-			       POP	{R0,R1,R2,PC}
+                    IMPORT KEY_ISR
+                    PUSH   {R0,R1,R2,LR}
+                    BL     KEY_ISR
+                    POP    {R0,R1,R2,PC}
                     ENDP
 ```
 
@@ -129,6 +129,8 @@ Keyboard_Handler    PROC
 
 //SEGDISP DEF
 #define Segdisp_data (*(volatile unsigned *)0x40000010)
+	
+extern uint32_t key_flag;
 
 void KEY_ISR(void);
 ```
@@ -149,28 +151,25 @@ void KEY_ISR(void)
 #include <string.h>
 #include <stdint.h>
 
-extern uint32_t key_flag;
-
 int main()
 {   
-	NVIC_CTRL_ADDR	= 1;
-	
-    while(1){
-		  while(!key_flag);
-		    uint32_t din;
-		    din = Keyboard_keydata_clear;
-		    int i = 0;
-		    int ans = 0;
-		    for (i = 0; i < 16; i++) {
-			    if ((din >> i) & 1) {
-			     	ans = i;
-				    Segdisp_data = 16 + ans; //enable
-				    break;
-				}
-			}
-		key_flag = 0;
-		Keyboard_keydata_clear = 1;
-	}
+  NVIC_CTRL_ADDR	= 1;  
+  while(1){
+    uint32_t din;
+    int i = 0;
+    int ans = 0;
+    while(!key_flag){};
+    din = Keyboard_keydata_clear;
+    for (i = 0; i < 16; i++) {
+        if ((din >> i) & 1) {
+        	ans = i;
+    	    Segdisp_data = (uint32_t)(16 + ans); //enable
+    	    break;
+    	}
+    }
+    key_flag = 0;
+    Keyboard_keydata_clear = 1;
+  }  
 }
 ```
 
@@ -178,4 +177,4 @@ int main()
 
 ### 调试与运行结果
 
-将相关的 Verilog 文件添加到 TD 工程中, 将 TD 生成的比特流 (bitstream) 文件下载到 FPGA 开发板上, 使用 Keil 调试. 在按下按键时, 可以看到数码管上显示了按键编号 (最左边的数码管), 之前的显示结果右移一位.
+将相关的 Verilog 文件添加到 TD 工程中, 将 TD 生成的比特流 (bitstream) 文件下载到 FPGA 开发板上, 使用 Keil 调试. 在按下按键时, 可以看到数码管上显示了按键编号 (最右边的数码管), 之前的显示结果左移一位.

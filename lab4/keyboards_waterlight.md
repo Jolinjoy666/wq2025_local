@@ -36,7 +36,7 @@
 
 ### 硬件模块代码
 
-第一步, 将按键模块输出的信号接到 Cortex-M0 系统的 IRQ 信号上, 因此在 CortexM0_SoC.v 文件做如下修改.
+第一步, 将按键模块输出的信号接到 Cortex-M0 系统的 IRQ 信号上, 因此在 "/Task4/key_waterlight/rtl/CortexM0_SoC.v" 文件做如下修改.
 
 ```verilog
 /*Connect the IRQ with keyboard*/
@@ -48,7 +48,7 @@ assign IRQ = 32'b0;
 
 ```verilog
 /*Connect the IRQ with keyboard*/
-assign IRQ = {28'b0,key_interrupt};
+assign IRQ = {28'b0, key_interrupt};
 /***************************/
 ```
 
@@ -67,8 +67,8 @@ assign IRQ = {28'b0,key_interrupt};
 ```c
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
-                DCD     0			              ; NMI Handler
-                DCD     0				          ; Hard Fault Handler
+                DCD     0                         ; NMI Handler
+                DCD     0                         ; Hard Fault Handler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -76,11 +76,11 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0			              ; SVCall Handler
+                DCD     0                         ; SVCall Handler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0            			  ; PendSV Handler
-                DCD     0          				  ; SysTick Handler
+                DCD     0                         ; PendSV Handler
+                DCD     0                         ; SysTick Handler
                 DCD     KEY0_Handler              ; IRQ0 Handler
                 DCD     KEY1_Handler              ; IRQ1 Handler
                 DCD     KEY2_Handler              ; IRQ2 Handler
@@ -99,36 +99,36 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
 
 ```c
 KEY0_Handler    PROC
-                  EXPORT KEY0_Handler            [WEAK]
-			    IMPORT KEY0
-				PUSH	{R0,R1,R2,LR}
-                   BL		KEY0
-				POP		{R0,R1,R2,PC}
-                   ENDP
+                EXPORT  KEY0_Handler            [WEAK]
+			    IMPORT  KEY0
+				PUSH    {R0,R1,R2,LR}
+                BL      KEY0
+				POP     {R0,R1,R2,PC}
+                ENDP
 
 KEY1_Handler    PROC
-                  EXPORT KEY1_Handler            [WEAK]
-			    IMPORT KEY1
-				PUSH	{R0,R1,R2,LR}
-                   BL		KEY1
-				POP		{R0,R1,R2,PC}
-                   ENDP
+                EXPORT  KEY1_Handler            [WEAK]
+			    IMPORT  KEY1
+				PUSH    {R0,R1,R2,LR}
+                BL      KEY1
+				POP     {R0,R1,R2,PC}
+                ENDP
 
 KEY2_Handler    PROC
-                   EXPORT KEY2_Handler            [WEAK]
-				IMPORT KEY2
-				PUSH	{R0,R1,R2,LR}
-                   BL		KEY2
-				POP		{R0,R1,R2,PC}
-                   ENDP
+                EXPORT  KEY2_Handler            [WEAK]
+				IMPORT  KEY2
+				PUSH    {R0,R1,R2,LR}
+                BL      KEY2
+				POP     {R0,R1,R2,PC}
+                ENDP
 
 KEY3_Handler    PROC
-                   EXPORT KEY3_Handler            [WEAK]
-				IMPORT KEY3
-				PUSH	{R0,R1,R2,LR}
-                   BL		KEY3
-				POP		{R0,R1,R2,PC}
-                   ENDP
+                EXPORT  KEY3_Handler            [WEAK]
+				IMPORT  KEY3
+				PUSH    {R0,R1,R2,LR}
+                BL      KEY3
+				POP     {R0,R1,R2,PC}
+                ENDP
 ```
 
 然后, 我们需要定义外设的地址, 以及自己实现的函数, 参考 CMSIS 编写自己头文件. 具体代码见 “/Task4/key_waterlight//keil/code_def.h”.
@@ -241,7 +241,7 @@ int main()
 ```
 
 <!-- -->
-> #### hint::C语言中, 头文件  和源文件的关系
+> #### hint:: C语言中, 头文件和源文件的关系
 > + 在实际的项目中, 可能有成千上万个源文件,并且会根据不同的功能模块划分不同的源文件, 那么随之而来的问题是, 不同文件之间如何共享函数和全局变量? 这里就有了头文件和源文件的划分了.
 > + 我们将需要共享的函数、外部变量和一些宏定义声明在头文件中, 头文件一般以h结尾. 将定义 (其实就是实现) 写在源文件中, 源文件一般以c结尾.
 > + 当不同源文件之间需要共享函数或者变量, 可以通过 #include 包含指令包含头文件即可 (当然, 头文件中也可以包含其他的头文件, 即头文件的嵌套).
@@ -250,8 +250,8 @@ int main()
 > #### fread::编译器的工作过程
 > + (1) 预处理阶段
 > + (2) 词法与语法分析阶段
-> + (3) 编译阶段, 首先编译成纯汇编语句, 再将之汇编成跟CPU相关的二进制码, 生成各个目标文件    (.obj文件)
-> + (4) 连接阶段, 将各个目标文件中的各段代码进行绝对地址定位, 生成跟特定平台相关的可执行文件, 当然, 最后还可以用objcopy生成纯二进制码, 也就是去掉了文件格式信息.
+> + (3) 编译阶段, 首先编译成纯汇编语句, 再将之汇编成跟 CPU 相关的二进制码, 生成各个目标文件(.obj文件)
+> + (4) 连接阶段, 将各个目标文件中的各段代码进行绝对地址定位, 生成跟特定平台相关的可执行文件, 当然, 最后还可以用 objcopy 生成纯二进制码, 也就是去掉了文件格式信息.
 > + 编译器在编译时是以 C 文件为单位进行的, 也就是说如果你的项目中一个 C 文件都没有, 那么你的项目将无法编译, 连接器是以目标文件为单位, 它将一个或多个目标文件进行函数与变量的重定位, 生成最终的可执行文件. 而这些 C 文件中又需要一个 main 函数作为可执行程序的入口.
 
 ### 调试与运行
@@ -266,4 +266,4 @@ int main()
 
 在 modelsim 仿真通过之后, 我们将相关的文件添加到 TD 工程中, 最后将 TD 生成的 bit 流文件下载到 FPGA 开发板上. 我们就能够通过按键控制硬件流水灯的模式.
 
-至此, 我们使用矩阵键盘中的 4 个按键, 通过中断响应的方法实现了对流水灯外设的控制. 然而, 对于一些复杂的应用场景, 可能需要用到更多按键, 如果仍然采用这种一个按键对应一个中断的方式将带来很大的开销 (比如占用过多 CPU 中断端口导致添加新功能时可用中断端口不足). 因此, 本实验介绍另外一种方法, 将矩阵键盘全部按键对应 CPU 上一个中断端口, CPU 在中断响应时通过总线读取按键信息, 进行相应的操作.
+至此, 我们使用矩阵键盘中的 4 个按键(key3, key2, key1, key0), 通过中断响应的方法实现了对流水灯外设的控制. 然而, 对于一些复杂的应用场景, 可能需要用到更多按键, 如果仍然采用这种一个按键对应一个中断的方式将带来很大的开销 (比如占用过多 CPU 中断端口导致添加新功能时可用中断端口不足). 因此, 本实验介绍另外一种方法, 将矩阵键盘全部按键对应 CPU 上一个中断端口, CPU 在中断响应时通过总线读取按键信息, 进行相应的操作.
