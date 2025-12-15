@@ -22,7 +22,9 @@
 >
 > - 2025/11/26: 更新 <font color="red">LAB3</font>. 本周进行 LAB3 实验, 实验报告截止日期为<font color="red"> 12 月 10 日中午 12 点</font>.
 > 
-> - 2025/12/07: 更新 <font color="red">LAB4</font>.
+> - 2025/12/07: 更新 <font color="red">LAB4</font> 和 <font color="red">LAB5</font>.
+> 
+> - 2025/12/10: 后续进行 LAB4 和 LAB5 实验, 两份实验报告截止日期均为<font color="red"> 12 月 31 日中午 12 点</font>.
 
 <!-- -->
 
@@ -37,6 +39,7 @@
 > | LAB2 - "点石成金" - 实现你的首个 SoC | Task2 |
 > | LAB3 - "灯, 等灯, 等灯"-流水灯的几种点法 | Task3 |
 > | LAB4 - 如何召唤"沉睡的软件" | Task4 |
+> | LAB5 - "吃硬还是吃软？"-软硬协同才是正道 | Task5 |
 
 
 <!-- -->
